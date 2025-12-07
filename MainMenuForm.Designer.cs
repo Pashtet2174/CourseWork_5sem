@@ -31,25 +31,30 @@ partial class MainMenuForm
     /// </summary>
     private void InitializeComponent()
     {
+        System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(MainMenuForm));
         button1 = new System.Windows.Forms.Button();
         SuspendLayout();
         // 
         // button1
         // 
+        button1.BackColor = System.Drawing.Color.Silver;
+        button1.ForeColor = System.Drawing.Color.Red;
         button1.Location = new System.Drawing.Point(724, 1);
         button1.Name = "button1";
         button1.Size = new System.Drawing.Size(74, 30);
         button1.TabIndex = 0;
         button1.Text = "выход";
-        button1.UseVisualStyleBackColor = true;
+        button1.UseVisualStyleBackColor = false;
         button1.Click += button1_Click;
         // 
         // MainMenuForm
         // 
         AutoScaleDimensions = new System.Drawing.SizeF(8F, 20F);
         AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
+        BackgroundImage = ((System.Drawing.Image)resources.GetObject("$this.BackgroundImage"));
         ClientSize = new System.Drawing.Size(800, 450);
         Controls.Add(button1);
+        Icon = ((System.Drawing.Icon)resources.GetObject("$this.Icon"));
         Text = "MainMenuForm";
         ResumeLayout(false);
     }

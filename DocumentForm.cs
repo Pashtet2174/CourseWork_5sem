@@ -8,12 +8,6 @@ public partial class DocumentForm : Form
     // Словарь для хранения шаблонов запросов. 
     // Заполним их позже, как вы просили.
     private readonly SaveFileDialog saveFileDialogCsv;
-    private readonly Dictionary<string, string> _queryTemplates = new Dictionary<string, string>
-    {
-        {"Заявки с деталями", "SELECT * FROM public.product_requests; -- Ваш готовый запрос 1"},
-        {"Продажи по сотрудникам", "SELECT * FROM public.employees; -- Ваш готовый запрос 2"},
-        // Добавляйте сюда другие готовые запросы
-    };
     
     public DocumentForm()
     {
@@ -31,36 +25,7 @@ public partial class DocumentForm : Form
 
         // Настройка DataGridView
         dataGridViewResults.AllowUserToAddRows = false;
-    
-        // Инициализация кнопок шаблонов
-        InitializeQueryTemplates();
     }
-
-    private void InitializeQueryTemplates()
-    {
-        foreach (var template in _queryTemplates)
-        {
-            Button btn = new Button
-            {
-                Text = template.Key,
-                Tag = template.Value, // SQL-запрос хранится в Tag
-                AutoSize = true,
-                Margin = new Padding(5)
-            };
-            btn.Click += TemplateButton_Click;
-            flowLayoutPanelTemplates.Controls.Add(btn);
-        }
-    }
-    
-    // Обработчик нажатия на кнопки готовых запросов
-    private void TemplateButton_Click(object sender, EventArgs e)
-    {
-        if (sender is Button btn && btn.Tag is string query)
-        {
-            textBoxQuery.Text = query;
-        }
-    }
-    
     // -------------------------------------------------------------------------
     // ЛОГИКА ЗАПУСКА ЗАПРОСА
     // -------------------------------------------------------------------------
@@ -177,10 +142,132 @@ public partial class DocumentForm : Form
         }
     }
 
-
-    private void button6_Click(object sender, EventArgs e)
+    private string GetPartsQuery()
     {
-            throw new System.NotImplementedException();
+        return @"
+SELECT 
+    name AS ""Название детали"", 
+    article AS ""Артикул""
+FROM parts
+ORDER BY name;";
+    }
+    private void button3_Click(object sender, EventArgs e)
+    {
+        textBoxQuery.Text = GetPartsQuery().Trim();
+    }
+    private string GetSupplierQuery()
+    {
+        return @"
+SELECT 
+    s.id AS ""ID поставщика"",
+    s.name AS ""Название поставщика"",
+    CASE 
+        WHEN s.category = 'Firms' THEN 'Фирмы'
+        WHEN s.category = 'Manufacturer' THEN 'Производитель'
+        WHEN s.category = 'dealer' THEN 'Дилер'
+        WHEN s.category = 'Small_production' THEN 'Мелкое производство'
+        WHEN s.category = 'Small_supplier' THEN 'Мелкий поставщик'
+        WHEN s.category = 'Store' THEN 'Магазин'
+    END AS ""Категория поставщика"",
+    s.phone_number AS ""Телефон поставщика"",
+    sup.part_id AS ""ID детали"",
+    sup.part_quantity AS ""Количество деталей""
+FROM suppliers s
+LEFT JOIN supplies sup ON s.id = sup.supplier_id
+ORDER BY s.id;";
+    }
+
+    private void button4_Click(object sender, EventArgs e)
+    {
+        textBoxQuery.Text = GetSupplierQuery().Trim();
     }
     
+    private string GetDetailedEmployeeQuery()
+    {
+        return @"
+        SELECT 
+            e.id AS ""ID сотрудника"",
+            e.last_name AS ""Фамилия"",
+            e.first_name AS ""Имя"",
+            e.middle_name AS ""Отчество"",
+            CASE 
+                WHEN e.gender = 'M' THEN 'Мужской'
+                WHEN e.gender = 'F' THEN 'Женский'
+            END AS ""Пол"",
+            e.birth_date AS ""Дата рождения"",
+            e.house_number AS ""Номер дома"",
+            e.work_experience AS ""Стаж работы"",
+            c.name AS ""Страна"",
+            ci.name AS ""Город"",
+            s.name AS ""Улица"",
+            p.name AS ""Должность"",
+            sp.name AS ""Специальность"",
+            w.name AS ""Место работы"",
+            d.name AS ""Отдел"",
+            q.name AS ""Квалификация"",
+            pr.name AS ""Профессия"",
+            wr.record_date AS ""Дата записи"",
+            CASE 
+                WHEN wr.event_type = 'Hiring' THEN 'Прием на работу'
+                WHEN wr.event_type = 'Dismissal' THEN 'Увольнение'
+                WHEN wr.event_type = 'Transfer' THEN 'Перевод'
+            END AS ""Тип события"",
+            wr.termination_reason AS ""Причина увольнения""
+        FROM employees e
+        LEFT JOIN countries c ON e.country_id = c.id
+        LEFT JOIN cities ci ON e.city_id = ci.id
+        LEFT JOIN streets s ON e.street_id = s.id
+        LEFT JOIN work_records wr ON e.id = wr.employee_id
+        LEFT JOIN positions p ON wr.position_id = p.id
+        LEFT JOIN specialties sp ON wr.specialty_id = sp.id
+        LEFT JOIN workplaces w ON wr.workplace_id = w.id
+        LEFT JOIN departments d ON wr.department_id = d.id
+        LEFT JOIN qualifications q ON wr.qualification_id = q.id
+        LEFT JOIN professions pr ON wr.profession_id = pr.id
+        ORDER BY e.id, wr.record_date DESC;";
+    }
+    
+    private void button6_Click(object sender, EventArgs e)
+    {
+        textBoxQuery.Text = GetDetailedEmployeeQuery().Trim();
+    }
+    
+    private string GetDetailedRequestQuery()
+    {
+        return @"
+SELECT 
+    pr.id AS ""ID Заявки"",
+    pr.creation_date AS ""Дата создания"",
+    pr.status AS ""Статус"",
+    pr.request_amount AS ""Сумма запроса"",
+    pr.operation_amount AS ""Сумма операции"",
+    pr.operation_date AS ""Дата операции"",
+    b.last_name AS ""Фамилия покупателя"",
+    b.first_name AS ""Имя покупателя"",
+    b.middle_name AS ""Отчество покупателя"",
+    p.name AS ""Название детали"",
+    p.article AS ""Артикул"",
+    rp.part_quantity AS ""Количество детали"",
+    m.name AS ""Производитель"",
+    c.name AS ""Страна""
+FROM 
+    product_requests pr 
+INNER JOIN 
+    buyers b ON pr.buyer_id = b.id
+INNER JOIN 
+    request_parts rp ON pr.id = rp.product_request_id
+INNER JOIN 
+    parts p ON rp.part_id = p.id
+INNER JOIN 
+    manufacturers m ON p.manufacturer_id = m.id
+INNER JOIN 
+    countries c ON p.country_id = c.id
+ORDER BY 
+    pr.creation_date DESC;";
+    }
+
+    private void button5_Click(object sender, EventArgs e)
+    {
+        textBoxQuery.Text = GetDetailedRequestQuery().Trim();
+    }
 }

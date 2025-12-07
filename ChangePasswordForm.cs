@@ -119,6 +119,4 @@ public partial class ChangePasswordForm : Form
             MessageBox.Show($"Ошибка при смене пароля: {ex.Message}", "Ошибка БД", MessageBoxButtons.OK, MessageBoxIcon.Error);
         }
     }
-
-    
 }
