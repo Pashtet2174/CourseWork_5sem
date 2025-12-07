@@ -119,4 +119,32 @@ public partial class ChangePasswordForm : Form
             MessageBox.Show($"Ошибка при смене пароля: {ex.Message}", "Ошибка БД", MessageBoxButtons.OK, MessageBoxIcon.Error);
         }
     }
+    
+    private void  button1_Click(object sender, EventArgs e)
+    {
+        if (txtOldPassword.UseSystemPasswordChar == true)
+        {
+            txtOldPassword.UseSystemPasswordChar = false;
+            txtOldPassword.PasswordChar = new char(); 
+        }
+        else 
+        { 
+            txtOldPassword.UseSystemPasswordChar = true;
+        }
+        txtOldPassword.Focus();
+    }
+    
+    private void  button2_Click(object sender, EventArgs e)
+    {
+        if (txtNewPassword.UseSystemPasswordChar == true)
+        {
+            txtNewPassword.UseSystemPasswordChar = false;
+            txtNewPassword.PasswordChar = new char(); 
+        }
+        else 
+        { 
+            txtNewPassword.UseSystemPasswordChar = true;
+        }
+        txtNewPassword.Focus();
+    }
 }

@@ -120,6 +120,7 @@ partial class ChangePasswordForm
         button1.TabIndex = 7;
         button1.Text = "👁️";
         button1.UseVisualStyleBackColor = false;
+        button1.Click += button1_Click;
         // 
         // button2
         // 
@@ -130,6 +131,7 @@ partial class ChangePasswordForm
         button2.TabIndex = 8;
         button2.Text = "👁️";
         button2.UseVisualStyleBackColor = false;
+        button2.Click += button2_Click;
         // 
         // ChangePasswordForm
         // 
