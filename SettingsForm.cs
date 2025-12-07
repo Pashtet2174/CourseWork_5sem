@@ -12,25 +12,19 @@ public partial class SettingsForm : Form
             ApplyNewFontSize(FontManager.CurrentFontSize);
             
         }
-
         private void BtnIncreaseFont_Click(object sender, EventArgs e)
         {
-            // Вызываем статический метод для увеличения шрифта
             FontManager.IncreaseFont();
-            // Опционально: можно добавить MessageBox.Show("Шрифт увеличен.");
         }
 
         private void BtnDecreaseFont_Click(object sender, EventArgs e)
         {
-            // Вызываем статический метод для уменьшения шрифта
             FontManager.DecreaseFont();
-            // Опционально: можно добавить MessageBox.Show("Шрифт уменьшен.");
         }
         private void FontManager_FontSizeChanged(object sender, EventArgs e)
         {
             ApplyNewFontSize(FontManager.CurrentFontSize);
         }
-    
         private void ApplyNewFontSize(float newSize)
         {
             this.Font = new Font(this.Font.FontFamily, newSize, this.Font.Style);
@@ -39,7 +33,6 @@ public partial class SettingsForm : Form
                 UpdateControlFont(control, newSize);
             }
         }
-    
         private void UpdateControlFont(Control parent, float newSize)
         {
             if (parent.Font != null)
@@ -51,7 +44,6 @@ public partial class SettingsForm : Form
                 UpdateControlFont(child, newSize);
             }
         }
-    
         protected override void OnFormClosed(FormClosedEventArgs e)
         {
             FontManager.FontSizeChanged -= FontManager_FontSizeChanged;

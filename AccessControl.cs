@@ -13,18 +13,18 @@ public static class AccessControl
         { "countries", "Страны" }, { "cities", "Города" }, { "streets", "Улицы" },
         
         // Клиентский отдел
-        { "buyers", "Покупатели" }, { "product_requests", "Запросы товаров" }, { "request_parts", "Детали запросов" },
+        { "buyers", "Покупатели" }, { "product_requests", "Заявки" }, { "request_parts", "Запчасти в заявках" },
         
         // Бухгалтерия
         { "employees", "Сотрудники" }, { "positions", "Должности" }, { "specialties", "Специальности" },
-        { "workplaces", "Рабочие места" }, { "departments", "Отделы" }, { "qualifications", "Квалификации" },
-        { "professions", "Профессии" }, { "work_records", "Учет работ" },
+        { "workplaces", "Место работы" }, { "departments", "Структурное подразделение" }, { "qualifications", "Квалификации" },
+        { "professions", "Профессии" }, { "work_records", "Запись в трудовой книжке" },
 
         // Закупки
         { "suppliers", "Поставщики" }, { "parts", "Запчасти" }, { "manufacturers", "Производители" },
         { "supplies", "Поставки" }, { "contracts", "Контракты" }, { "defects", "Брак" },
-        { "order_parts", "Заказ запчастей" }, { "customer_orders", "Заказы клиентов" },
-        { "cell_parts", "Ячейки с деталями" }, { "cells", "Ячейки склада" }
+        { "order_parts", "Запчасти  в заказах" }, { "customer_orders", "Заказы" },
+        { "cell_parts", "Запчасти в ячейках" }, { "cells", "Ячейки" }
     };
     
     // --- 3. НОВЫЙ ЭЛЕМЕНТ: Множество для классификации таблиц (Reference List) ---

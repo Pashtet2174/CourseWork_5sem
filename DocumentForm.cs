@@ -13,7 +13,8 @@ public partial class DocumentForm : Form
     {
         InitializeComponent();
         this.Text = "Подготовка выходных документов и отчетов";
-
+        FontManager.FontSizeChanged += FontManager_FontSizeChanged;
+        ApplyNewFontSize(FontManager.CurrentFontSize); 
         // =======================================================
         // ДОБАВЛЕНИЕ: Настройка формы для встраивания (MDI-стиль)
         // =======================================================
@@ -269,5 +270,37 @@ ORDER BY
     private void button5_Click(object sender, EventArgs e)
     {
         textBoxQuery.Text = GetDetailedRequestQuery().Trim();
+    }
+    
+    private void FontManager_FontSizeChanged(object sender, EventArgs e)
+    {
+        ApplyNewFontSize(FontManager.CurrentFontSize);
+    }
+    
+    private void ApplyNewFontSize(float newSize)
+    {
+        this.Font = new Font(this.Font.FontFamily, newSize, this.Font.Style);
+        foreach (Control control in this.Controls)
+        {
+            UpdateControlFont(control, newSize);
+        }
+    }
+    
+    private void UpdateControlFont(Control parent, float newSize)
+    {
+        if (parent.Font != null)
+        {
+            parent.Font = new Font(parent.Font.FontFamily, newSize, parent.Font.Style);
+        }
+        foreach (Control child in parent.Controls)
+        {
+            UpdateControlFont(child, newSize);
+        }
+    }
+    
+    protected override void OnFormClosed(FormClosedEventArgs e)
+    {
+        FontManager.FontSizeChanged -= FontManager_FontSizeChanged;
+        base.OnFormClosed(e);
     }
 }
