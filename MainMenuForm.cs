@@ -197,7 +197,23 @@ public partial class MainMenuForm : Form
     // Обработчики для "Разное"
     private void MiscSettings_Click(object sender, EventArgs e)
     {
-        MessageBox.Show("Заглушка: Открытие формы настроек.");
+        _contentPanel.Controls.Clear();
+
+        // 2. Создание и отображение формы настроек
+        try
+        {
+            var settingsForm = new SettingsForm();
+        
+            // Встраиваем ее в панель
+            _contentPanel.Controls.Add(settingsForm);
+        
+            // Отображаем форму
+            settingsForm.Show();
+        }
+        catch (Exception ex)
+        {
+            MessageBox.Show($"Не удалось открыть модуль 'Настройки': {ex.Message}", "Ошибка", MessageBoxButtons.OK, MessageBoxIcon.Error);
+        }
     }
     
     private void MiscChangePassword_Click(object sender, EventArgs e)

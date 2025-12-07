@@ -144,7 +144,8 @@ public partial class ChangePasswordForm : Form
         else 
         { 
             txtNewPassword.UseSystemPasswordChar = true;
-        }
+        }       
         txtNewPassword.Focus();
     }
+    
 }

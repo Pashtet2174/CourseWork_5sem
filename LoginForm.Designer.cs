@@ -136,7 +136,7 @@ partial class LoginForm
         Controls.Add(txtPassword);
         Controls.Add(txtLogin);
         Controls.Add(btnLogin);
-        Font = new System.Drawing.Font("Calibri", 10.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)204));
+        Font = new System.Drawing.Font("Calibri", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)204));
         FormBorderStyle = System.Windows.Forms.FormBorderStyle.Fixed3D;
         Icon = ((System.Drawing.Icon)resources.GetObject("$this.Icon"));
         Margin = new System.Windows.Forms.Padding(40, 16, 40, 16);
