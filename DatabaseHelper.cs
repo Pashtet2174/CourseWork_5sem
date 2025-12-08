@@ -1,7 +1,7 @@
-using Npgsql;
 using System;
 using System.Data;
 using System.Windows.Forms;
+using Npgsql;
 namespace CourseWork_5sem;
 
 public class DatabaseHelper

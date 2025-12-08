@@ -50,6 +50,7 @@ public partial class MainMenuForm : Form
         CreateSimpleMenuItem("Документы", Documents_Click);
         CreateMiscMenu();
         CreateHelpMenu();
+        CreateSimpleMenuItem("Аналитика", AnalyticsMenu_Click);
     }
 
     #region Menu Creation Methods
@@ -326,7 +327,27 @@ public partial class MainMenuForm : Form
         base.OnFormClosed(e);
     }
     
+    private void AnalyticsMenu_Click(object sender, EventArgs e)
+    {
+        // 1. Очистка старого контента
+        _contentPanel.Controls.Clear();
 
+        // 2. Создание и отображение формы аналитики
+        try
+        {
+            var analyticsForm = new AnalyticsForm();
+        
+            // Встраиваем ее в панель
+            _contentPanel.Controls.Add(analyticsForm);
+        
+            // Отображаем форму
+            analyticsForm.Show();
+        }
+        catch (Exception ex)
+        {
+            MessageBox.Show($"Не удалось открыть модуль 'Аналитика': {ex.Message}", "Ошибка", MessageBoxButtons.OK, MessageBoxIcon.Error);
+        }
+    }
 
     
 }
