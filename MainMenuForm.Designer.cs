@@ -51,11 +51,12 @@ partial class MainMenuForm
         // 
         // MainMenuForm
         // 
-        AutoScaleMode = System.Windows.Forms.AutoScaleMode.Inherit;
+        AutoScaleMode = System.Windows.Forms.AutoScaleMode.None;
         BackgroundImage = ((System.Drawing.Image)resources.GetObject("$this.BackgroundImage"));
         ClientSize = new System.Drawing.Size(1482, 853);
         Controls.Add(button1);
         Icon = ((System.Drawing.Icon)resources.GetObject("$this.Icon"));
+        MaximizeBox = false;
         MaximumSize = new System.Drawing.Size(1500, 900);
         MinimumSize = new System.Drawing.Size(1500, 900);
         Text = "MainMenuForm";
