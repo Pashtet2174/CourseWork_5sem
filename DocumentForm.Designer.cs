@@ -57,7 +57,7 @@ partial class DocumentForm
         textBoxQuery.Multiline = true;
         textBoxQuery.Name = "textBoxQuery";
         textBoxQuery.ScrollBars = System.Windows.Forms.ScrollBars.Horizontal;
-        textBoxQuery.Size = new System.Drawing.Size(1080, 433);
+        textBoxQuery.Size = new System.Drawing.Size(973, 476);
         textBoxQuery.TabIndex = 0;
         // 
         // dataGridViewResults
@@ -65,12 +65,12 @@ partial class DocumentForm
         dataGridViewResults.BackgroundColor = System.Drawing.Color.Silver;
         dataGridViewResults.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
         dataGridViewResults.Dock = System.Windows.Forms.DockStyle.Bottom;
-        dataGridViewResults.Location = new System.Drawing.Point(0, 433);
+        dataGridViewResults.Location = new System.Drawing.Point(0, 476);
         dataGridViewResults.Margin = new System.Windows.Forms.Padding(4);
         dataGridViewResults.Name = "dataGridViewResults";
         dataGridViewResults.ReadOnly = true;
         dataGridViewResults.RowHeadersWidth = 51;
-        dataGridViewResults.Size = new System.Drawing.Size(1560, 389);
+        dataGridViewResults.Size = new System.Drawing.Size(1755, 428);
         dataGridViewResults.TabIndex = 1;
         dataGridViewResults.Text = "dataGridView1";
         // 
@@ -83,10 +83,10 @@ partial class DocumentForm
         flowLayoutPanelTemplates.Controls.Add(button4);
         flowLayoutPanelTemplates.Controls.Add(button3);
         flowLayoutPanelTemplates.Dock = System.Windows.Forms.DockStyle.Right;
-        flowLayoutPanelTemplates.Location = new System.Drawing.Point(1095, 0);
+        flowLayoutPanelTemplates.Location = new System.Drawing.Point(1232, 0);
         flowLayoutPanelTemplates.Margin = new System.Windows.Forms.Padding(4);
         flowLayoutPanelTemplates.Name = "flowLayoutPanelTemplates";
-        flowLayoutPanelTemplates.Size = new System.Drawing.Size(465, 433);
+        flowLayoutPanelTemplates.Size = new System.Drawing.Size(523, 476);
         flowLayoutPanelTemplates.TabIndex = 2;
         // 
         // btnExecuteQuery
@@ -96,7 +96,7 @@ partial class DocumentForm
         btnExecuteQuery.Location = new System.Drawing.Point(4, 4);
         btnExecuteQuery.Margin = new System.Windows.Forms.Padding(4);
         btnExecuteQuery.Name = "btnExecuteQuery";
-        btnExecuteQuery.Size = new System.Drawing.Size(207, 96);
+        btnExecuteQuery.Size = new System.Drawing.Size(233, 106);
         btnExecuteQuery.TabIndex = 0;
         btnExecuteQuery.Text = "Запустить";
         btnExecuteQuery.UseVisualStyleBackColor = false;
@@ -106,10 +106,10 @@ partial class DocumentForm
         // 
         btnExportToCsv.BackColor = System.Drawing.Color.YellowGreen;
         btnExportToCsv.Dock = System.Windows.Forms.DockStyle.Top;
-        btnExportToCsv.Location = new System.Drawing.Point(219, 4);
+        btnExportToCsv.Location = new System.Drawing.Point(245, 4);
         btnExportToCsv.Margin = new System.Windows.Forms.Padding(4);
         btnExportToCsv.Name = "btnExportToCsv";
-        btnExportToCsv.Size = new System.Drawing.Size(207, 96);
+        btnExportToCsv.Size = new System.Drawing.Size(233, 106);
         btnExportToCsv.TabIndex = 1;
         btnExportToCsv.Text = "Сохранить в файл";
         btnExportToCsv.UseVisualStyleBackColor = false;
@@ -119,10 +119,10 @@ partial class DocumentForm
         // 
         button6.BackColor = System.Drawing.Color.Silver;
         button6.Dock = System.Windows.Forms.DockStyle.Top;
-        button6.Location = new System.Drawing.Point(4, 108);
+        button6.Location = new System.Drawing.Point(4, 118);
         button6.Margin = new System.Windows.Forms.Padding(4);
         button6.Name = "button6";
-        button6.Size = new System.Drawing.Size(207, 96);
+        button6.Size = new System.Drawing.Size(233, 106);
         button6.TabIndex = 7;
         button6.Text = "Записи сотрудников";
         button6.UseVisualStyleBackColor = false;
@@ -132,10 +132,10 @@ partial class DocumentForm
         // 
         button5.BackColor = System.Drawing.Color.Silver;
         button5.Dock = System.Windows.Forms.DockStyle.Top;
-        button5.Location = new System.Drawing.Point(219, 108);
+        button5.Location = new System.Drawing.Point(245, 118);
         button5.Margin = new System.Windows.Forms.Padding(4);
         button5.Name = "button5";
-        button5.Size = new System.Drawing.Size(207, 96);
+        button5.Size = new System.Drawing.Size(233, 106);
         button5.TabIndex = 6;
         button5.Text = "Список заявок";
         button5.UseVisualStyleBackColor = false;
@@ -145,10 +145,10 @@ partial class DocumentForm
         // 
         button4.BackColor = System.Drawing.Color.Silver;
         button4.Dock = System.Windows.Forms.DockStyle.Top;
-        button4.Location = new System.Drawing.Point(4, 212);
+        button4.Location = new System.Drawing.Point(4, 232);
         button4.Margin = new System.Windows.Forms.Padding(4);
         button4.Name = "button4";
-        button4.Size = new System.Drawing.Size(207, 96);
+        button4.Size = new System.Drawing.Size(233, 106);
         button4.TabIndex = 5;
         button4.Text = "Список поставщиков и их поставок";
         button4.UseVisualStyleBackColor = false;
@@ -158,10 +158,10 @@ partial class DocumentForm
         // 
         button3.BackColor = System.Drawing.Color.Silver;
         button3.Dock = System.Windows.Forms.DockStyle.Top;
-        button3.Location = new System.Drawing.Point(219, 212);
+        button3.Location = new System.Drawing.Point(245, 232);
         button3.Margin = new System.Windows.Forms.Padding(4);
         button3.Name = "button3";
-        button3.Size = new System.Drawing.Size(207, 96);
+        button3.Size = new System.Drawing.Size(233, 106);
         button3.TabIndex = 4;
         button3.Text = "Список деталей";
         button3.UseVisualStyleBackColor = false;
@@ -174,10 +174,10 @@ partial class DocumentForm
         panel1.Controls.Add(textBoxQuery);
         panel1.Controls.Add(flowLayoutPanelTemplates);
         panel1.Controls.Add(dataGridViewResults);
-        panel1.Location = new System.Drawing.Point(144, 77);
+        panel1.Location = new System.Drawing.Point(162, 85);
         panel1.Margin = new System.Windows.Forms.Padding(4);
         panel1.Name = "panel1";
-        panel1.Size = new System.Drawing.Size(1560, 822);
+        panel1.Size = new System.Drawing.Size(1755, 904);
         panel1.TabIndex = 3;
         // 
         // DocumentForm
@@ -186,7 +186,7 @@ partial class DocumentForm
         AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
         AutoSize = true;
         BackgroundImage = ((System.Drawing.Image)resources.GetObject("$this.BackgroundImage"));
-        ClientSize = new System.Drawing.Size(1770, 1052);
+        ClientSize = new System.Drawing.Size(1991, 1157);
         Controls.Add(panel1);
         Font = new System.Drawing.Font("Calibri", 10.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)204));
         Icon = ((System.Drawing.Icon)resources.GetObject("$this.Icon"));

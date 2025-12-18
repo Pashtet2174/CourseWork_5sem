@@ -287,7 +287,6 @@ namespace CourseWork_5sem
             FontManager.FontSizeChanged -= FontManager_FontSizeChanged;
             base.OnFormClosed(e);
         }
-
         
     }
 }

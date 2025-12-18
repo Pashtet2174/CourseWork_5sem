@@ -37,6 +37,7 @@ partial class AnalyticsForm
         System.Windows.Forms.DataVisualization.Charting.ChartArea chartArea2 = new System.Windows.Forms.DataVisualization.Charting.ChartArea();
         System.Windows.Forms.DataVisualization.Charting.Legend legend2 = new System.Windows.Forms.DataVisualization.Charting.Legend();
         System.Windows.Forms.DataVisualization.Charting.Series series2 = new System.Windows.Forms.DataVisualization.Charting.Series();
+        System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(AnalyticsForm));
         analyticsChart = new System.Windows.Forms.DataVisualization.Charting.Chart();
         metricsChart = new System.Windows.Forms.DataVisualization.Charting.Chart();
         ((System.ComponentModel.ISupportInitialize)analyticsChart).BeginInit();
@@ -49,7 +50,7 @@ partial class AnalyticsForm
         analyticsChart.ChartAreas.Add(chartArea1);
         legend1.Name = "Legend1";
         analyticsChart.Legends.Add(legend1);
-        analyticsChart.Location = new System.Drawing.Point(77, 87);
+        analyticsChart.Location = new System.Drawing.Point(53, 48);
         analyticsChart.Name = "analyticsChart";
         series1.ChartArea = "ChartArea1";
         series1.Legend = "Legend1";
@@ -65,7 +66,7 @@ partial class AnalyticsForm
         metricsChart.ChartAreas.Add(chartArea2);
         legend2.Name = "Legend1";
         metricsChart.Legends.Add(legend2);
-        metricsChart.Location = new System.Drawing.Point(445, 92);
+        metricsChart.Location = new System.Drawing.Point(422, 53);
         metricsChart.Name = "metricsChart";
         series2.ChartArea = "ChartArea1";
         series2.Legend = "Legend1";
@@ -79,6 +80,7 @@ partial class AnalyticsForm
         // 
         AutoScaleDimensions = new System.Drawing.SizeF(8F, 20F);
         AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
+        BackgroundImage = ((System.Drawing.Image)resources.GetObject("$this.BackgroundImage"));
         ClientSize = new System.Drawing.Size(800, 450);
         Controls.Add(metricsChart);
         Controls.Add(analyticsChart);

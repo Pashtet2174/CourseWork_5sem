@@ -48,13 +48,13 @@ partial class TableBrowserForm
         // 
         _dataGridView.AllowUserToAddRows = false;
         _dataGridView.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-        _dataGridView.Dock = System.Windows.Forms.DockStyle.Bottom;
-        _dataGridView.Location = new System.Drawing.Point(0, 62);
+        _dataGridView.Dock = System.Windows.Forms.DockStyle.Fill;
+        _dataGridView.Location = new System.Drawing.Point(0, 40);
         _dataGridView.Name = "_dataGridView";
         _dataGridView.ReadOnly = true;
         _dataGridView.RowHeadersWidth = 51;
-        _dataGridView.Size = new System.Drawing.Size(942, 402);
-        _dataGridView.TabIndex = 0;
+        _dataGridView.Size = new System.Drawing.Size(942, 424);
+        _dataGridView.TabIndex = 1;
         _dataGridView.Text = "dataGridView1";
         // 
         // _crudPanel
@@ -69,7 +69,7 @@ partial class TableBrowserForm
         _crudPanel.Location = new System.Drawing.Point(0, 0);
         _crudPanel.Name = "_crudPanel";
         _crudPanel.Size = new System.Drawing.Size(942, 40);
-        _crudPanel.TabIndex = 1;
+        _crudPanel.TabIndex = 0;
         // 
         // _searchTextBox
         // 
@@ -152,8 +152,8 @@ partial class TableBrowserForm
         AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
         BackgroundImage = ((System.Drawing.Image)resources.GetObject("$this.BackgroundImage"));
         ClientSize = new System.Drawing.Size(942, 464);
-        Controls.Add(_crudPanel);
         Controls.Add(_dataGridView);
+        Controls.Add(_crudPanel);
         Text = "TableBrowserForm";
         ((System.ComponentModel.ISupportInitialize)_dataGridView).EndInit();
         _crudPanel.ResumeLayout(false);

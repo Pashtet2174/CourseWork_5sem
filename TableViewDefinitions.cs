@@ -74,7 +74,7 @@ public class TableViewDefinitions
             LEFT JOIN countries c ON p.country_id = c.id
             ORDER BY p.id",
         ColumnNames = new List<string> { 
-            "id", "name", "article", "manufacturer_name", "country_name" 
+            "id", "название", "артикул", "manufacturer_name", "страна" 
         }
     };
     
