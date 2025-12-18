@@ -303,4 +303,5 @@ ORDER BY
         FontManager.FontSizeChanged -= FontManager_FontSizeChanged;
         base.OnFormClosed(e);
     }
+    
 }
