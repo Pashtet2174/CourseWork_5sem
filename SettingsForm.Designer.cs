@@ -39,21 +39,21 @@ partial class SettingsForm
         // 
         // btnIncreaseFont
         // 
-        btnIncreaseFont.Location = new System.Drawing.Point(64, 50);
+        btnIncreaseFont.Location = new System.Drawing.Point(67, 53);
         btnIncreaseFont.Name = "btnIncreaseFont";
-        btnIncreaseFont.Size = new System.Drawing.Size(130, 60);
+        btnIncreaseFont.Size = new System.Drawing.Size(117, 68);
         btnIncreaseFont.TabIndex = 0;
-        btnIncreaseFont.Text = "➕ Увеличить шрифт";
+        btnIncreaseFont.Text = "➕ ";
         btnIncreaseFont.UseVisualStyleBackColor = true;
         btnIncreaseFont.Click += BtnIncreaseFont_Click;
         // 
         // btnDecreaseFont
         // 
-        btnDecreaseFont.Location = new System.Drawing.Point(200, 50);
+        btnDecreaseFont.Location = new System.Drawing.Point(218, 53);
         btnDecreaseFont.Name = "btnDecreaseFont";
-        btnDecreaseFont.Size = new System.Drawing.Size(130, 60);
+        btnDecreaseFont.Size = new System.Drawing.Size(111, 68);
         btnDecreaseFont.TabIndex = 1;
-        btnDecreaseFont.Text = "➖ Уменьшить шрифт";
+        btnDecreaseFont.Text = "➖ ";
         btnDecreaseFont.UseVisualStyleBackColor = true;
         btnDecreaseFont.Click += BtnDecreaseFont_Click;
         // 
@@ -65,14 +65,14 @@ partial class SettingsForm
         label1.Size = new System.Drawing.Size(262, 41);
         label1.TabIndex = 2;
         label1.Text = "Изменитьразмер шрифта";
-        label1.TextAlign = System.Drawing.ContentAlignment.TopCenter;
+        label1.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
         // 
         // SettingsForm
         // 
         AutoScaleDimensions = new System.Drawing.SizeF(8F, 20F);
         AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
         BackgroundImage = ((System.Drawing.Image)resources.GetObject("$this.BackgroundImage"));
-        ClientSize = new System.Drawing.Size(800, 450);
+        ClientSize = new System.Drawing.Size(1482, 853);
         Controls.Add(label1);
         Controls.Add(btnDecreaseFont);
         Controls.Add(btnIncreaseFont);

@@ -74,6 +74,7 @@ partial class TableBrowserForm
         // _searchTextBox
         // 
         _searchTextBox.Dock = System.Windows.Forms.DockStyle.Right;
+        _searchTextBox.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)204));
         _searchTextBox.Location = new System.Drawing.Point(1188, 0);
         _searchTextBox.Margin = new System.Windows.Forms.Padding(5);
         _searchTextBox.Name = "_searchTextBox";
