@@ -51,8 +51,7 @@ partial class MainMenuForm
         // 
         // MainMenuForm
         // 
-        AutoScaleDimensions = new System.Drawing.SizeF(8F, 20F);
-        AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
+        AutoScaleMode = System.Windows.Forms.AutoScaleMode.Inherit;
         BackgroundImage = ((System.Drawing.Image)resources.GetObject("$this.BackgroundImage"));
         ClientSize = new System.Drawing.Size(1482, 853);
         Controls.Add(button1);
