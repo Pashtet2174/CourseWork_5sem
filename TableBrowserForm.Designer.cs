@@ -53,7 +53,7 @@ partial class TableBrowserForm
         _dataGridView.Name = "_dataGridView";
         _dataGridView.ReadOnly = true;
         _dataGridView.RowHeadersWidth = 51;
-        _dataGridView.Size = new System.Drawing.Size(942, 424);
+        _dataGridView.Size = new System.Drawing.Size(1482, 813);
         _dataGridView.TabIndex = 1;
         _dataGridView.Text = "dataGridView1";
         // 
@@ -68,13 +68,13 @@ partial class TableBrowserForm
         _crudPanel.Dock = System.Windows.Forms.DockStyle.Top;
         _crudPanel.Location = new System.Drawing.Point(0, 0);
         _crudPanel.Name = "_crudPanel";
-        _crudPanel.Size = new System.Drawing.Size(942, 40);
+        _crudPanel.Size = new System.Drawing.Size(1482, 40);
         _crudPanel.TabIndex = 0;
         // 
         // _searchTextBox
         // 
         _searchTextBox.Dock = System.Windows.Forms.DockStyle.Right;
-        _searchTextBox.Location = new System.Drawing.Point(648, 0);
+        _searchTextBox.Location = new System.Drawing.Point(1188, 0);
         _searchTextBox.Margin = new System.Windows.Forms.Padding(5);
         _searchTextBox.Name = "_searchTextBox";
         _searchTextBox.PlaceholderText = "Поиск...";
@@ -85,7 +85,7 @@ partial class TableBrowserForm
         // 
         _searchButton.AutoSize = true;
         _searchButton.Dock = System.Windows.Forms.DockStyle.Right;
-        _searchButton.Location = new System.Drawing.Point(848, 0);
+        _searchButton.Location = new System.Drawing.Point(1388, 0);
         _searchButton.Margin = new System.Windows.Forms.Padding(5);
         _searchButton.Name = "_searchButton";
         _searchButton.Size = new System.Drawing.Size(94, 40);
@@ -151,7 +151,7 @@ partial class TableBrowserForm
         AutoScaleDimensions = new System.Drawing.SizeF(8F, 20F);
         AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
         BackgroundImage = ((System.Drawing.Image)resources.GetObject("$this.BackgroundImage"));
-        ClientSize = new System.Drawing.Size(942, 464);
+        ClientSize = new System.Drawing.Size(1482, 853);
         Controls.Add(_dataGridView);
         Controls.Add(_crudPanel);
         Text = "TableBrowserForm";

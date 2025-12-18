@@ -40,19 +40,21 @@ partial class AboutForm
         // panel1
         // 
         panel1.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) | System.Windows.Forms.AnchorStyles.Left) | System.Windows.Forms.AnchorStyles.Right));
+        panel1.AutoScroll = true;
         panel1.BackColor = System.Drawing.Color.DarkGray;
         panel1.Controls.Add(label1);
         panel1.Location = new System.Drawing.Point(137, 47);
         panel1.Name = "panel1";
-        panel1.Size = new System.Drawing.Size(494, 445);
+        panel1.Size = new System.Drawing.Size(1297, 825);
         panel1.TabIndex = 0;
         // 
         // label1
         // 
-        label1.Dock = System.Windows.Forms.DockStyle.Fill;
-        label1.Location = new System.Drawing.Point(0, 0);
+        label1.AutoSize = true;
+        label1.Font = new System.Drawing.Font("Segoe UI", 7.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)204));
+        label1.Location = new System.Drawing.Point(304, 26);
         label1.Name = "label1";
-        label1.Size = new System.Drawing.Size(494, 445);
+        label1.Size = new System.Drawing.Size(581, 663);
         label1.TabIndex = 0;
         label1.Text = resources.GetString("label1.Text");
         label1.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
@@ -62,12 +64,13 @@ partial class AboutForm
         AutoScaleDimensions = new System.Drawing.SizeF(8F, 20F);
         AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
         BackgroundImage = ((System.Drawing.Image)resources.GetObject("$this.BackgroundImage"));
-        ClientSize = new System.Drawing.Size(697, 520);
+        ClientSize = new System.Drawing.Size(1500, 900);
         Controls.Add(panel1);
         FormBorderStyle = System.Windows.Forms.FormBorderStyle.None;
         Icon = ((System.Drawing.Icon)resources.GetObject("$this.Icon"));
         Text = "О программе";
         panel1.ResumeLayout(false);
+        panel1.PerformLayout();
         ResumeLayout(false);
     }
 
