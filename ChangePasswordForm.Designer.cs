@@ -45,83 +45,83 @@ partial class ChangePasswordForm
         // 
         // lblUsername
         // 
-        lblUsername.BackColor = System.Drawing.Color.NavajoWhite;
+        lblUsername.BackColor = System.Drawing.Color.Linen;
         lblUsername.Font = new System.Drawing.Font("Calibri", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)204));
-        lblUsername.Location = new System.Drawing.Point(279, 118);
+        lblUsername.Location = new System.Drawing.Point(251, 64);
         lblUsername.Name = "lblUsername";
-        lblUsername.Size = new System.Drawing.Size(255, 37);
+        lblUsername.Size = new System.Drawing.Size(287, 39);
         lblUsername.TabIndex = 0;
         lblUsername.Text = "Старый пароль";
-        lblUsername.TextAlign = System.Drawing.ContentAlignment.TopCenter;
+        lblUsername.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
         // 
         // txtOldPassword
         // 
-        txtOldPassword.BackColor = System.Drawing.Color.Bisque;
-        txtOldPassword.Location = new System.Drawing.Point(279, 193);
+        txtOldPassword.BackColor = System.Drawing.Color.Silver;
+        txtOldPassword.Location = new System.Drawing.Point(251, 167);
         txtOldPassword.Name = "txtOldPassword";
         txtOldPassword.PasswordChar = '●';
-        txtOldPassword.Size = new System.Drawing.Size(255, 28);
+        txtOldPassword.Size = new System.Drawing.Size(286, 28);
         txtOldPassword.TabIndex = 1;
         txtOldPassword.UseSystemPasswordChar = true;
         // 
         // txtNewPassword
         // 
-        txtNewPassword.BackColor = System.Drawing.Color.Bisque;
-        txtNewPassword.Location = new System.Drawing.Point(279, 356);
+        txtNewPassword.BackColor = System.Drawing.Color.Silver;
+        txtNewPassword.Location = new System.Drawing.Point(250, 334);
         txtNewPassword.Name = "txtNewPassword";
         txtNewPassword.PasswordChar = '●';
-        txtNewPassword.Size = new System.Drawing.Size(255, 28);
+        txtNewPassword.Size = new System.Drawing.Size(286, 28);
         txtNewPassword.TabIndex = 2;
         txtNewPassword.UseSystemPasswordChar = true;
         // 
         // txtConfirmPassword
         // 
-        txtConfirmPassword.BackColor = System.Drawing.Color.Bisque;
-        txtConfirmPassword.Location = new System.Drawing.Point(279, 468);
+        txtConfirmPassword.BackColor = System.Drawing.Color.Silver;
+        txtConfirmPassword.Location = new System.Drawing.Point(250, 480);
         txtConfirmPassword.Name = "txtConfirmPassword";
         txtConfirmPassword.PasswordChar = '●';
-        txtConfirmPassword.Size = new System.Drawing.Size(255, 28);
+        txtConfirmPassword.Size = new System.Drawing.Size(286, 28);
         txtConfirmPassword.TabIndex = 3;
         txtConfirmPassword.UseSystemPasswordChar = true;
         // 
         // btnChangePassword
         // 
-        btnChangePassword.BackColor = System.Drawing.Color.Khaki;
-        btnChangePassword.Location = new System.Drawing.Point(279, 534);
+        btnChangePassword.BackColor = System.Drawing.Color.MediumSeaGreen;
+        btnChangePassword.Location = new System.Drawing.Point(250, 538);
         btnChangePassword.Name = "btnChangePassword";
-        btnChangePassword.Size = new System.Drawing.Size(255, 47);
+        btnChangePassword.Size = new System.Drawing.Size(288, 74);
         btnChangePassword.TabIndex = 4;
         btnChangePassword.Text = "Сменить пароль";
         btnChangePassword.UseVisualStyleBackColor = false;
         // 
         // label1
         // 
-        label1.BackColor = System.Drawing.Color.NavajoWhite;
+        label1.BackColor = System.Drawing.Color.Linen;
         label1.Font = new System.Drawing.Font("Calibri", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)204));
-        label1.Location = new System.Drawing.Point(279, 291);
+        label1.Location = new System.Drawing.Point(251, 258);
         label1.Name = "label1";
-        label1.Size = new System.Drawing.Size(255, 37);
+        label1.Size = new System.Drawing.Size(287, 39);
         label1.TabIndex = 5;
         label1.Text = "Новый пароль";
-        label1.TextAlign = System.Drawing.ContentAlignment.TopCenter;
+        label1.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
         // 
         // label2
         // 
-        label2.BackColor = System.Drawing.Color.NavajoWhite;
+        label2.BackColor = System.Drawing.Color.Linen;
         label2.Font = new System.Drawing.Font("Calibri", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)204));
-        label2.Location = new System.Drawing.Point(279, 400);
+        label2.Location = new System.Drawing.Point(251, 396);
         label2.Name = "label2";
-        label2.Size = new System.Drawing.Size(255, 37);
+        label2.Size = new System.Drawing.Size(287, 39);
         label2.TabIndex = 6;
         label2.Text = "Подтвердите пароль";
-        label2.TextAlign = System.Drawing.ContentAlignment.TopCenter;
+        label2.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
         // 
         // button1
         // 
-        button1.BackColor = System.Drawing.Color.PapayaWhip;
-        button1.Location = new System.Drawing.Point(557, 193);
+        button1.BackColor = System.Drawing.Color.SlateGray;
+        button1.Location = new System.Drawing.Point(553, 331);
         button1.Name = "button1";
-        button1.Size = new System.Drawing.Size(44, 30);
+        button1.Size = new System.Drawing.Size(50, 31);
         button1.TabIndex = 7;
         button1.Text = "👁️";
         button1.UseVisualStyleBackColor = false;
@@ -129,10 +129,11 @@ partial class ChangePasswordForm
         // 
         // button2
         // 
-        button2.BackColor = System.Drawing.Color.PapayaWhip;
-        button2.Location = new System.Drawing.Point(557, 356);
+        button2.BackColor = System.Drawing.Color.SlateGray;
+        button2.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
+        button2.Location = new System.Drawing.Point(553, 480);
         button2.Name = "button2";
-        button2.Size = new System.Drawing.Size(44, 30);
+        button2.Size = new System.Drawing.Size(50, 28);
         button2.TabIndex = 8;
         button2.Text = "👁️";
         button2.UseVisualStyleBackColor = false;
@@ -144,7 +145,7 @@ partial class ChangePasswordForm
         AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
         BackColor = System.Drawing.SystemColors.Control;
         BackgroundImage = ((System.Drawing.Image)resources.GetObject("$this.BackgroundImage"));
-        ClientSize = new System.Drawing.Size(871, 662);
+        ClientSize = new System.Drawing.Size(790, 690);
         Controls.Add(button2);
         Controls.Add(button1);
         Controls.Add(label2);
