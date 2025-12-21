@@ -1,14 +1,17 @@
+using System.Diagnostics; 
+using System.IO;
 namespace CourseWork_5sem;
 
 public partial class MainMenuForm : Form
 {
-    private MenuStrip _mainMenu;
+    private System.Windows.Forms.MenuStrip _mainMenu;
     private Panel _contentPanel;
     public MainMenuForm()   
     {
         InitializeComponent();
         _contentPanel = new Panel();
         _contentPanel.Dock = DockStyle.Fill;
+        _contentPanel.BackColor = Color.Transparent;
         this.Controls.Add(_contentPanel);
         this.Load += MainMenuForm_Load;
         FontManager.FontSizeChanged += FontManager_FontSizeChanged;
@@ -18,18 +21,12 @@ public partial class MainMenuForm : Form
     private void MainMenuForm_Load(object sender, EventArgs e)
     {
         // Получаем роль из вашего DatabaseHelper
-        string role = DatabaseHelper.CurrentUserRole;
-        this.Text = $"Главное меню - Авторизован как: {role}";
+            string role = DatabaseHelper.CurrentUserRole;
+            this.Text = $"Главное меню - Авторизован как: {role}";
         
         // Инициализация динамического меню
         ConfigureMenuAccess(role);
-
-        // Убираем временную метку "Добро пожаловать!"
-        // Label welcomeLabel = new Label();
-        // welcomeLabel.Text = $"Добро пожаловать! Ваша роль: {role}";
-        // welcomeLabel.AutoSize = true;
-        // welcomeLabel.Location = new System.Drawing.Point(20, 20);
-        // this.Controls.Add(welcomeLabel);
+        
     }
 
     private void ConfigureMenuAccess(string role)
@@ -234,7 +231,32 @@ public partial class MainMenuForm : Form
     // Обработчики для "Справка"
     private void HelpManual_Click(object sender, EventArgs e)
     {
-        MessageBox.Show("Заглушка: Открытие руководства.");
+        string fileName = "form.html";
+        string path = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, fileName);
+
+        // 2. Проверяем, существует ли файл физически
+        if (File.Exists(path))
+        {
+            try
+            {
+                // 3. Запускаем браузер по умолчанию
+                Process.Start(new ProcessStartInfo
+                {
+                    FileName = path,
+                    UseShellExecute = true 
+                });
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show($"Ошибка при открытии браузера: {ex.Message}");
+            }
+        }
+        else
+        {
+            // Если забыл положить файл в папку bin/Debug
+            MessageBox.Show($"Файл не найден по пути: {path}\n\n" +
+                            "Убедитесь, что в свойствах файла 'Copy to Output Directory' установлено 'Copy always'.");
+        }
     }
     
     private void HelpAbout_Click(object sender, EventArgs e)

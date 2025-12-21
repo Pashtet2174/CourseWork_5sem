@@ -41,7 +41,7 @@ partial class MainMenuForm
         button1.BackColor = System.Drawing.Color.Silver;
         button1.CausesValidation = false;
         button1.ForeColor = System.Drawing.Color.FromArgb(((int)((byte)64)), ((int)((byte)64)), ((int)((byte)64)));
-        button1.Location = new System.Drawing.Point(1406, 0);
+        button1.Location = new System.Drawing.Point(1408, 0);
         button1.Name = "button1";
         button1.Size = new System.Drawing.Size(74, 30);
         button1.TabIndex = 0;
