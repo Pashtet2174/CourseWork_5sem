@@ -2,14 +2,14 @@ namespace CourseWork_5sem;
 
 public class TableViewDefinitions
 {
-    // Используем структуру из AccessControl
+    
     public struct TableViewMetadata
     {
         public string DisplaySql;
         public List<string> ColumnNames;
     }
     
-    // Таблица 4: employees
+    
     public static TableViewMetadata CreateEmployeeMetadata() => new TableViewMetadata
     {
         DisplaySql = @"
@@ -28,7 +28,7 @@ public class TableViewDefinitions
         }
     };
     
-    // Таблица 11: work_records
+    
     public static TableViewMetadata CreateWorkRecordsMetadata() => new TableViewMetadata
     {
         DisplaySql = @"
@@ -61,7 +61,7 @@ public class TableViewDefinitions
         }
     };
 
-    // Таблица 13: parts
+    
     public static TableViewMetadata CreatePartsMetadata() => new TableViewMetadata
     {
         DisplaySql = @"
@@ -78,7 +78,7 @@ public class TableViewDefinitions
         }
     };
     
-    // Таблица 15: supplies
+    
     public static TableViewMetadata CreateSuppliesMetadata() => new TableViewMetadata
     {
         DisplaySql = @"
@@ -96,7 +96,7 @@ public class TableViewDefinitions
         }
     };
 
-    // Таблица 16: contracts
+    
     public static TableViewMetadata CreateContractsMetadata() => new TableViewMetadata
     {
         DisplaySql = @"
@@ -114,7 +114,7 @@ public class TableViewDefinitions
         }
     };
 
-    // Таблица 17: defects
+    
     public static TableViewMetadata CreateDefectsMetadata() => new TableViewMetadata
     {
         DisplaySql = @"
@@ -133,7 +133,7 @@ public class TableViewDefinitions
         }
     };
 
-    // Таблица 18: customer_orders
+    
     public static TableViewMetadata CreateCustomerOrdersMetadata() => new TableViewMetadata
     {
         DisplaySql = @"
@@ -166,7 +166,7 @@ public class TableViewDefinitions
         }
     };
 
-    // Таблица 21: cell_parts
+    
     public static TableViewMetadata CreateCellPartsMetadata() => new TableViewMetadata
     {
         DisplaySql = @"
@@ -183,7 +183,7 @@ public class TableViewDefinitions
         }
     };
 
-    // Таблица 23: product_requests
+    
     public static TableViewMetadata CreateProductRequestsMetadata() => new TableViewMetadata
     {
         DisplaySql = @"
@@ -199,7 +199,7 @@ public class TableViewDefinitions
         }
     };
 
-    // Таблица 24: request_parts
+    
     public static TableViewMetadata CreateRequestPartsMetadata() => new TableViewMetadata
     {
         DisplaySql = @"

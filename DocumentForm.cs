@@ -5,8 +5,6 @@ namespace CourseWork_5sem;
 
 public partial class DocumentForm : Form
 {
-    // Словарь для хранения шаблонов запросов. 
-    // Заполним их позже, как вы просили.
     private readonly SaveFileDialog saveFileDialogCsv;
     
     public DocumentForm()
@@ -15,22 +13,13 @@ public partial class DocumentForm : Form
         this.Text = "Подготовка выходных документов и отчетов";
         FontManager.FontSizeChanged += FontManager_FontSizeChanged;
         ApplyNewFontSize(FontManager.CurrentFontSize); 
-        // =======================================================
-        // ДОБАВЛЕНИЕ: Настройка формы для встраивания (MDI-стиль)
-        // =======================================================
         saveFileDialogCsv = new SaveFileDialog();
         this.TopLevel = false;
         this.FormBorderStyle = FormBorderStyle.None;
-        this.Dock = DockStyle.Fill; // Заполняем родительский контейнер
-        // =======================================================
+        this.Dock = DockStyle.Fill; 
 
-        // Настройка DataGridView
         dataGridViewResults.AllowUserToAddRows = false;
     }
-    // -------------------------------------------------------------------------
-    // ЛОГИКА ЗАПУСКА ЗАПРОСА
-    // -------------------------------------------------------------------------
-
     private void BtnExecuteQuery_Click(object sender, EventArgs e)
     {
         string sql = textBoxQuery.Text.Trim();
@@ -41,7 +30,6 @@ public partial class DocumentForm : Form
             return;
         }
 
-        // Убеждаемся, что запрос безопасен (только SELECT)
         if (!sql.StartsWith("SELECT", StringComparison.OrdinalIgnoreCase))
         {
              MessageBox.Show("Разрешены только запросы, начинающиеся с SELECT.", "Ошибка безопасности", MessageBoxButtons.OK, MessageBoxIcon.Error);
@@ -50,7 +38,6 @@ public partial class DocumentForm : Form
 
         try
         {
-            // Используем универсальный метод из DatabaseHelper для получения DataTable
             DataTable dt = DatabaseHelper.ExecuteDataTable(sql); 
             
             if (dt != null)
@@ -70,9 +57,6 @@ public partial class DocumentForm : Form
         }
     }
 
-    // -------------------------------------------------------------------------
-    // ЛОГИКА ЭКСПОРТА В CSV
-    // -------------------------------------------------------------------------
     
     private void BtnExportToCsv_Click(object sender, EventArgs e)
     {
@@ -82,7 +66,6 @@ public partial class DocumentForm : Form
             return;
         }
         
-        // Настройка диалога сохранения
         saveFileDialogCsv.Filter = "CSV files (*.csv)|*.csv";
         saveFileDialogCsv.Title = "Экспорт данных в CSV";
         saveFileDialogCsv.FileName = "Report_" + DateTime.Now.ToString("yyyyMMdd_HHmm");
@@ -93,17 +76,12 @@ public partial class DocumentForm : Form
         }
     }
 
-    /// <summary>
-    /// Экспортирует DataTable в CSV с разделителем ';' и кодировкой UTF-8.
-    /// </summary>
     private void ExportDataTableToCsv(DataTable dt, string filePath)
     {
         try
         {
-            // Используем UTF8 для корректного отображения кириллицы
             using (StreamWriter sw = new StreamWriter(filePath, false, Encoding.UTF8))
             {
-                // Заголовки (Header)
                 for (int i = 0; i < dt.Columns.Count; i++)
                 {
                     sw.Write(dt.Columns[i].ColumnName);
@@ -114,18 +92,16 @@ public partial class DocumentForm : Form
                 }
                 sw.WriteLine();
 
-                // Данные (Rows)
                 foreach (DataRow dr in dt.Rows)
                 {
                     for (int i = 0; i < dt.Columns.Count; i++)
                     {
-                        // Заменяем переносы строк и двойные кавычки и заключаем в кавычки для безопасности
                         string value = dr[i].ToString()
-                            .Replace("\"", "\"\"") // Экранирование кавычек
+                            .Replace("\"", "\"\"") 
                             .Replace("\n", " ")
                             .Replace("\r", " "); 
                         
-                        sw.Write($"\"{value}\""); // Заключаем в двойные кавычки
+                        sw.Write($"\"{value}\""); 
                         
                         if (i < dt.Columns.Count - 1)
                         {
@@ -146,11 +122,11 @@ public partial class DocumentForm : Form
     private string GetPartsQuery()
     {
         return @"
-SELECT 
-    name AS ""Название детали"", 
-    article AS ""Артикул""
-FROM parts
-ORDER BY name;";
+    SELECT 
+      name AS ""Название детали"", 
+      article AS ""Артикул""
+    FROM parts
+    ORDER BY name;";
     }
     private void button3_Click(object sender, EventArgs e)
     {
@@ -159,23 +135,23 @@ ORDER BY name;";
     private string GetSupplierQuery()
     {
         return @"
-SELECT 
-    s.id AS ""ID поставщика"",
-    s.name AS ""Название поставщика"",
-    CASE 
-        WHEN s.category = 'Firms' THEN 'Фирмы'
-        WHEN s.category = 'Manufacturer' THEN 'Производитель'
-        WHEN s.category = 'dealer' THEN 'Дилер'
-        WHEN s.category = 'Small_production' THEN 'Мелкое производство'
-        WHEN s.category = 'Small_supplier' THEN 'Мелкий поставщик'
-        WHEN s.category = 'Store' THEN 'Магазин'
-    END AS ""Категория поставщика"",
-    s.phone_number AS ""Телефон поставщика"",
-    sup.part_id AS ""ID детали"",
-    sup.part_quantity AS ""Количество деталей""
-FROM suppliers s
-LEFT JOIN supplies sup ON s.id = sup.supplier_id
-ORDER BY s.id;";
+    SELECT 
+        s.id AS ""ID поставщика"",
+        s.name AS ""Название поставщика"",
+        CASE 
+            WHEN s.category = 'Firms' THEN 'Фирмы'
+            WHEN s.category = 'Manufacturer' THEN 'Производитель'
+            WHEN s.category = 'dealer' THEN 'Дилер'
+            WHEN s.category = 'Small_production' THEN 'Мелкое производство'
+            WHEN s.category = 'Small_supplier' THEN 'Мелкий поставщик'
+            WHEN s.category = 'Store' THEN 'Магазин'
+        END AS ""Категория поставщика"",
+        s.phone_number AS ""Телефон поставщика"",
+        sup.part_id AS ""ID детали"",
+        sup.part_quantity AS ""Количество деталей""
+    FROM suppliers s
+    LEFT JOIN supplies sup ON s.id = sup.supplier_id
+    ORDER BY s.id;";
     }
 
     private void button4_Click(object sender, EventArgs e)
@@ -236,35 +212,35 @@ ORDER BY s.id;";
     private string GetDetailedRequestQuery()
     {
         return @"
-SELECT 
-    pr.id AS ""ID Заявки"",
-    pr.creation_date AS ""Дата создания"",
-    pr.status AS ""Статус"",
-    pr.request_amount AS ""Сумма запроса"",
-    pr.operation_amount AS ""Сумма операции"",
-    pr.operation_date AS ""Дата операции"",
-    b.last_name AS ""Фамилия покупателя"",
-    b.first_name AS ""Имя покупателя"",
-    b.middle_name AS ""Отчество покупателя"",
-    p.name AS ""Название детали"",
-    p.article AS ""Артикул"",
-    rp.part_quantity AS ""Количество детали"",
-    m.name AS ""Производитель"",
-    c.name AS ""Страна""
-FROM 
-    product_requests pr 
-INNER JOIN 
-    buyers b ON pr.buyer_id = b.id
-INNER JOIN 
-    request_parts rp ON pr.id = rp.product_request_id
-INNER JOIN 
-    parts p ON rp.part_id = p.id
-INNER JOIN 
-    manufacturers m ON p.manufacturer_id = m.id
-INNER JOIN 
-    countries c ON p.country_id = c.id
-ORDER BY 
-    pr.creation_date DESC;";
+    SELECT 
+        pr.id AS ""ID Заявки"",
+        pr.creation_date AS ""Дата создания"",
+        pr.status AS ""Статус"",
+        pr.request_amount AS ""Сумма запроса"",
+        pr.operation_amount AS ""Сумма операции"",
+        pr.operation_date AS ""Дата операции"",
+        b.last_name AS ""Фамилия покупателя"",
+        b.first_name AS ""Имя покупателя"",
+        b.middle_name AS ""Отчество покупателя"",
+        p.name AS ""Название детали"",
+        p.article AS ""Артикул"",
+        rp.part_quantity AS ""Количество детали"",
+        m.name AS ""Производитель"",
+        c.name AS ""Страна""
+    FROM 
+        product_requests pr 
+    INNER JOIN 
+        buyers b ON pr.buyer_id = b.id
+    INNER JOIN 
+        request_parts rp ON pr.id = rp.product_request_id
+    INNER JOIN 
+        parts p ON rp.part_id = p.id
+    INNER JOIN 
+        manufacturers m ON p.manufacturer_id = m.id
+    INNER JOIN 
+        countries c ON p.country_id = c.id
+    ORDER BY 
+        pr.creation_date DESC;";
     }
 
     private void button5_Click(object sender, EventArgs e)

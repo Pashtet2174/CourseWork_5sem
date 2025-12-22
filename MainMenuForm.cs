@@ -20,29 +20,21 @@ public partial class MainMenuForm : Form
 
     private void MainMenuForm_Load(object sender, EventArgs e)
     {
-        // Получаем роль из вашего DatabaseHelper
             string role = DatabaseHelper.CurrentUserRole;
             this.Text = $"Главное меню - Авторизован как: {role}";
-        
-        // Инициализация динамического меню
         ConfigureMenuAccess(role);
         
     }
 
     private void ConfigureMenuAccess(string role)
     {
-        // 1. Создаем MenuStrip
         _mainMenu = new MenuStrip();
         this.Controls.Add(_mainMenu);
         this.MainMenuStrip = _mainMenu;
 
-        // 2. Получаем список всех доступных таблиц из БД
         List<string> accessibleTables = DatabaseHelper.GetAllAccessibleTables();
     
-        // 3. Создаем динамические пункты, разделяя таблицы на Справочники и Мои таблицы
-        CreateDynamicMenu(accessibleTables); // <-- Вызываем новый метод вместо старых
-    
-        // 4. Добавляем статичные пункты
+        CreateDynamicMenu(accessibleTables);
     
         CreateSimpleMenuItem("Документы", Documents_Click);
         CreateMiscMenu();
@@ -50,13 +42,9 @@ public partial class MainMenuForm : Form
         CreateSimpleMenuItem("Аналитика", AnalyticsMenu_Click);
     }
 
-    #region Menu Creation Methods
     
-    // --- 1. Справочники (Статичный список, доступен всем) ---
-    /// <summary>
-    /// Динамически строит пункты "Справочники" и "Мои таблицы", 
-    /// используя список из БД и классификацию из AccessControl.
-    /// </summary>
+    
+    
     private void CreateDynamicMenu(List<string> accessibleTables)
     {
         var refMenu = CreateMenuItem("Справочники");
@@ -71,12 +59,10 @@ public partial class MainMenuForm : Form
 
             if (AccessControl.ReferenceTables.Contains(tableName))
             {
-                // ИСПОЛЬЗУЕМ ЕДИНЫЙ ОБРАБОТЧИК
                 AddSubItem(refMenu, tableName, displayName, OpenTable_Click);
             }
             else
             {
-                // ИСПОЛЬЗУЕМ ЕДИНЫЙ ОБРАБОТЧИК
                 AddSubItem(myTablesMenu, tableName, displayName, OpenTable_Click);
             }
         }
@@ -92,7 +78,6 @@ public partial class MainMenuForm : Form
         }
     }
 
-    // --- 3. Разное (Настройки, Сменить пароль) ---
     private void CreateMiscMenu()
     {
         var miscMenu = CreateMenuItem("Разное");
@@ -101,7 +86,6 @@ public partial class MainMenuForm : Form
         _mainMenu.Items.Add(miscMenu);
     }
 
-    // --- 4. Справка (Руководство, О программе) ---
     private void CreateHelpMenu()
     {
         var helpMenu = CreateMenuItem("Справка");
@@ -110,17 +94,12 @@ public partial class MainMenuForm : Form
         _mainMenu.Items.Add(helpMenu);
     }
     
-    #endregion
-
-    #region Helpers
     
-    // Вспомогательный метод для создания пункта меню верхнего уровня
     private ToolStripMenuItem CreateMenuItem(string text)
     {
         return new ToolStripMenuItem(text);
     }
     
-    // Вспомогательный метод для создания пункта меню верхнего уровня с обработчиком
     private void CreateSimpleMenuItem(string text, EventHandler handler)
     {
         var item = CreateMenuItem(text);
@@ -128,35 +107,25 @@ public partial class MainMenuForm : Form
         _mainMenu.Items.Add(item);
     }
 
-    // Вспомогательный метод для добавления подпунктов
     private void AddSubItem(ToolStripMenuItem parent, string dbTableName, string text, EventHandler handler)
     {
         var item = new ToolStripMenuItem(text);
-        item.Tag = dbTableName; // Храним имя таблицы в Tag
+        item.Tag = dbTableName; 
         item.Click += handler;
         parent.DropDownItems.Add(item);
     }
     
-    #endregion
 
-    #region Event Handlers (Заглушки)
-
-    // Обработчик для пункта "Документы"
     private void Documents_Click(object sender, EventArgs e)
     {
-        // 1. Очистка старого контента
         _contentPanel.Controls.Clear();
 
-        // 2. Создание и отображение новой формы документов
         try
         {
-            // Создаем новую форму
             var docForm = new DocumentForm();
         
-            // Встраиваем ее в панель
             _contentPanel.Controls.Add(docForm);
         
-            // Отображаем форму, теперь она заполнит панель
             docForm.Show();
         }
         catch (Exception ex)
@@ -165,7 +134,6 @@ public partial class MainMenuForm : Form
         }
     }
 
-    // Обработчик для "Мои таблицы"
     private void OpenTable_Click(object sender, EventArgs e)
     {
         var item = sender as ToolStripMenuItem;
@@ -177,10 +145,8 @@ public partial class MainMenuForm : Form
             return;
         }
 
-        // 1. Очистка старого контента
         _contentPanel.Controls.Clear();
 
-        // 2. Создание и отображение новой формы просмотра таблицы
         try
         {
             var tableForm = new TableBrowserForm(tableName);
@@ -189,25 +155,20 @@ public partial class MainMenuForm : Form
         }
         catch (Exception ex)
         {
-            // Обработка ошибок, которые могут возникнуть в TableBrowserForm (например, ошибки подключения)
             MessageBox.Show($"Не удалось открыть таблицу '{item.Text}': {ex.Message}", "Ошибка", MessageBoxButtons.OK, MessageBoxIcon.Error);
         }
     }
     
-    // Обработчики для "Разное"
     private void MiscSettings_Click(object sender, EventArgs e)
     {
         _contentPanel.Controls.Clear();
 
-        // 2. Создание и отображение формы настроек
         try
         {
             var settingsForm = new SettingsForm();
         
-            // Встраиваем ее в панель
             _contentPanel.Controls.Add(settingsForm);
         
-            // Отображаем форму
             settingsForm.Show();
         }
         catch (Exception ex)
@@ -220,26 +181,20 @@ public partial class MainMenuForm : Form
     {
         using (var changeForm = new ChangePasswordForm())
         {
-            // Открываем как диалоговое окно (модально)
             changeForm.ShowDialog();
         
-            // Если форма вернула DialogResult.OK, это означает успешную смену пароля.
-            // Вы можете добавить дополнительную логику, если нужно.
         }
     }
     
-    // Обработчики для "Справка"
     private void HelpManual_Click(object sender, EventArgs e)
     {
         string fileName = "form.html";
         string path = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, fileName);
 
-        // 2. Проверяем, существует ли файл физически
         if (File.Exists(path))
         {
             try
             {
-                // 3. Запускаем браузер по умолчанию
                 Process.Start(new ProcessStartInfo
                 {
                     FileName = path,
@@ -253,7 +208,6 @@ public partial class MainMenuForm : Form
         }
         else
         {
-            // Если забыл положить файл в папку bin/Debug
             MessageBox.Show($"Файл не найден по пути: {path}\n\n" +
                             "Убедитесь, что в свойствах файла 'Copy to Output Directory' установлено 'Copy always'.");
         }
@@ -263,15 +217,12 @@ public partial class MainMenuForm : Form
     {
         _contentPanel.Controls.Clear();
 
-        // 2. Создание и отображение новой формы "О программе"
         try
         {
             var aboutForm = new AboutForm();
         
-            // Встраиваем ее в панель
             _contentPanel.Controls.Add(aboutForm);
         
-            // Отображаем форму, теперь она заполнит панель
             aboutForm.Show();
         }
         catch (Exception ex)
@@ -282,16 +233,12 @@ public partial class MainMenuForm : Form
 
     private void MainMenuForm_FormClosed(object sender, FormClosedEventArgs e)
     {
-        // Важно закрыть соединение при выходе
         DatabaseHelper.CloseConnection();
-        //Application.Exit();
     }
     
-    #endregion
 
     private void button1_Click(object sender, EventArgs e)
     {
-        // 1. Оповещаем пользователя о выходе (опционально)
         DialogResult result = MessageBox.Show(
             "Вы действительно хотите выйти из профиля?", 
             "Подтверждение выхода", 
@@ -300,14 +247,9 @@ public partial class MainMenuForm : Form
 
         if (result == DialogResult.Yes)
         {
-            // 1. Очистка и закрытие соединения
             DatabaseHelper.CurrentUserRole = null; 
             DatabaseHelper.CloseConnection(); 
-
-            // 2. Создаем и показываем форму входа
             this.DialogResult = DialogResult.OK;
-            // !!! КЛЮЧЕВОЕ ИЗМЕНЕНИЕ: Используем DialogResult и this.Close() !!!
-            // Установка DialogResult сигнализирует Windows Forms, что форма закрывается успешно.
             
         }
     }
@@ -351,18 +293,14 @@ public partial class MainMenuForm : Form
     
     private void AnalyticsMenu_Click(object sender, EventArgs e)
     {
-        // 1. Очистка старого контента
         _contentPanel.Controls.Clear();
 
-        // 2. Создание и отображение формы аналитики
         try
         {
             var analyticsForm = new AnalyticsForm();
         
-            // Встраиваем ее в панель
             _contentPanel.Controls.Add(analyticsForm);
         
-            // Отображаем форму
             analyticsForm.Show();
         }
         catch (Exception ex)

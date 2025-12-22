@@ -6,27 +6,20 @@ namespace CourseWork_5sem;
 
 public class DatabaseHelper
 {
-    // Храним текущее активное соединение
     public static NpgsqlConnection CurrentConnection { get;  set; }
     
-    // Храним роль (имя пользователя) для настройки интерфейса в будущем
     public static string CurrentUserRole { get; set; }
-    // ДОБАВЛЕНИЕ: Хранение текущего пароля для переподключения
     private static string _currentPassword = "";
 
-    private const string Host = "localhost"; // Или ваш IP адрес
-    private const string Database = "cars_parts_db"; // Имя вашей БД
+    private const string Host = "localhost"; 
+    private const string Database = "cars_parts_db";
     private const int Port = 5432;
     
     public static string CurrentUsername => CurrentUserRole;
-    /// <summary>
-    /// Попытка подключения к БД с указанными учетными данными
-    /// </summary>
     public static bool TryLogin(string username, string password)
     {
         try
         {
-            // Используем Builder для безопасного создания строки подключения
             var builder = new NpgsqlConnectionStringBuilder
             {
                 Host = Host,
@@ -34,17 +27,13 @@ public class DatabaseHelper
                 Database = Database,
                 Username = username,
                 Password = password,
-                // Полезно для отладки, но в продакшене лучше убрать
                 IncludeErrorDetail = true 
             };
 
-            // Создаем новое соединение
             var tempConnection = new NpgsqlConnection(builder.ConnectionString);
             
-            // Пробуем открыть. Если пароль неверный - Npgsql выбросит исключение
             tempConnection.Open();
 
-            // Если мы здесь, значит логин успешен. Сохраняем соединение.
             if (CurrentConnection != null && CurrentConnection.State == System.Data.ConnectionState.Open)
             {
                 CurrentConnection.Close();
@@ -84,16 +73,8 @@ public class DatabaseHelper
         }
     }
     
-    // =========================================================================
-    // ДОБАВЛЕНИЕ ДЛЯ СМЕНЫ ПАРОЛЯ
-    // =========================================================================
-
-    /// <summary>
-    /// Пытается установить соединение с БД для проверки учетных данных (используется для проверки старого пароля).
-    /// </summary>
     public static bool TestConnection(string username, string password)
     {
-        // Строка подключения для проверки
         string testConnectionString = new NpgsqlConnectionStringBuilder
         {
             Host = Host,
@@ -108,11 +89,11 @@ public class DatabaseHelper
             try
             {
                 conn.Open();
-                return true; // Соединение удалось -> Пароль верен
+                return true;
             }
             catch (NpgsqlException)
             {
-                return false; // Соединение не удалось -> Пароль не верен
+                return false; 
             }
             catch (Exception)
             {
@@ -121,18 +102,12 @@ public class DatabaseHelper
         }
     }
     
-    /// <summary>
-    /// Обновляет хранимый пароль и переподключает активное соединение с новыми учетными данными.
-    /// </summary>
     public static void UpdateConnectionCredentials(string username, string newPassword)
     {
-        // 1. Обновляем хранимый пароль
         _currentPassword = newPassword;
         
-        // 2. Закрываем старое соединение
         CloseConnection(); 
         
-        // 3. Создаем новое соединение с новым паролем
         var builder = new NpgsqlConnectionStringBuilder
         {
             Host = Host,
@@ -150,18 +125,10 @@ public class DatabaseHelper
         }
         catch (Exception ex)
         {
-            // Если переподключение не удалось, нужно сообщить пользователю
             MessageBox.Show($"ВНИМАНИЕ! Пароль в БД изменен, но не удалось переподключиться: {ex.Message}", "Критическая ошибка", MessageBoxButtons.OK, MessageBoxIcon.Error);
-            
-            // В этом случае лучше закрыть приложение или предложить перелогиниться.
-            // В рамках данной задачи просто оповестим:
             CurrentConnection = null;
-            // Необходим выход, чтобы пользователь снова вошел с новым паролем.
         }
     }
-    /// <summary>
-    /// Возвращает список всех таблиц, доступных текущему пользователю в схеме public.
-    /// </summary>
     public static List<string> GetAllAccessibleTables()
     {
         var tableNames = new List<string>();
@@ -173,8 +140,6 @@ public class DatabaseHelper
           AND table_type = 'BASE TABLE'
         ORDER BY table_name;";
 
-        // Внимание: Здесь используется DatabaseHelper.CurrentConnection. 
-        // Убедитесь, что объект NpgsqlConnection доступен и открыт.
         using (var cmd = new NpgsqlCommand(sql, CurrentConnection)) 
         {
             try
@@ -189,7 +154,6 @@ public class DatabaseHelper
             }
             catch (Exception ex)
             {
-                // Обработка ошибок БД
                 MessageBox.Show($"Ошибка при получении списка таблиц: {ex.Message}", "Ошибка БД");
             }
         }
@@ -197,12 +161,6 @@ public class DatabaseHelper
     }
     
     
-    
-    
-    /// <summary>
-    /// Выполняет SQL-запрос и возвращает результат в виде DataTable.
-    /// Использует параметризованные запросы.
-    /// </summary>
     public static DataTable ExecuteDataTable(string sql, Dictionary<string, object> parameters = null)
     {
         if (CurrentConnection == null || CurrentConnection.State != System.Data.ConnectionState.Open)
@@ -213,7 +171,6 @@ public class DatabaseHelper
         var dataTable = new DataTable();
         using (var cmd = new NpgsqlCommand(sql, CurrentConnection))
         {
-            // Добавление параметров для защиты от SQL-инъекций
             if (parameters != null)
             {
                 foreach (var param in parameters)
@@ -231,40 +188,28 @@ public class DatabaseHelper
             }
             catch (Exception ex)
             {
-                // Выбрасываем исключение, чтобы его поймал вызывающий метод (TableBrowserForm)
                 throw new Exception($"Ошибка при выполнении запроса: {ex.Message}", ex);
             }
         }
         return dataTable;
     }
 
-    /// <summary>
-    /// Возвращает SQL-запрос SELECT с заменой внешних ключей на имена.
-    /// </summary>
     public static string GetDisplayQuery(string tableName)
     {
-        // Проверяем, есть ли кастомные метаданные для этой таблицы
         if (AccessControl.CustomTableViews.TryGetValue(tableName, out var metadata))
         {
             return metadata.DisplaySql;
         }
 
-        // Запрос по умолчанию для всех остальных таблиц (например, справочников)
         return $"SELECT * FROM {tableName} ORDER BY 1";
     }
     
-    /// <summary>
-    /// Получает имена колонок для указанной таблицы (используется для поиска).
-    /// </summary>
     public static List<string> GetColumnNames(string tableName)
     {
-        // Эту информацию лучше хранить в AccessControl или получать из information_schema
-        // Для примера, возвращаем список для employees и parts.
         if (AccessControl.CustomTableViews.TryGetValue(tableName, out var metadata))
         {
             return metadata.ColumnNames;
         }
-            // Запрос для получения имен колонок из БД для других таблиц
         var columns = new List<string>();
         string sql = $@"
             SELECT column_name
@@ -302,21 +247,18 @@ public class DatabaseHelper
             {
                 foreach (var pair in parameters)
                 {
-                    // Убедитесь, что типы обрабатываются корректно, 
-                    // хотя для DELETE достаточно object.
                     cmd.Parameters.AddWithValue(pair.Key, pair.Value);
                 }
             }
 
             try
             {
-                // ExecuteNonQuery возвращает количество затронутых строк
                 return cmd.ExecuteNonQuery();
             }
             catch (Exception ex)
             {
                 MessageBox.Show($"Ошибка при выполнении запроса: {ex.Message}", "Ошибка БД", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                return -1; // Возвращаем -1 в случае ошибки
+                return -1; 
             }
         }
     }
@@ -345,27 +287,22 @@ public class DatabaseHelper
         string sql;
         if (referenceTableName.Equals("employees", StringComparison.OrdinalIgnoreCase))
         {
-            // Для employees: конкатенируем Имя и Фамилию
             sql = "SELECT id, first_name || ' ' || last_name AS name FROM employees ORDER BY last_name";
         }
         else if (referenceTableName.Equals("buyers", StringComparison.OrdinalIgnoreCase))
         {
-            // Для buyers: конкатенируем Имя и Фамилию
             sql = "SELECT id, first_name || ' ' || last_name AS name FROM buyers ORDER BY last_name";
         }
         else if (referenceTableName.Equals("cells", StringComparison.OrdinalIgnoreCase))
         {
-            // ДОБАВЛЕНИЕ: Для ячеек склада: используем cell_number
             sql = "SELECT id, cell_number AS name FROM cells ORDER BY cell_number";
         }
         else if (referenceTableName.Equals("customer_orders", StringComparison.OrdinalIgnoreCase))
         {
-            // Для заказов: используем ID и дату заказа
             sql = "SELECT id, 'Заказ №' || id || ' от ' || TO_CHAR(order_date, 'YYYY-MM-DD') AS name FROM customer_orders ORDER BY id DESC";
         }
         else if (referenceTableName.Equals("product_requests", StringComparison.OrdinalIgnoreCase))
         {
-            // Ошибка: 'product_requests': 42703
             sql = "SELECT id, 'Заявка №' || id || ' от ' || TO_CHAR(creation_date, 'YYYY-MM-DD') AS name FROM product_requests ORDER BY id DESC";
         }
         else
@@ -396,7 +333,6 @@ public class DatabaseHelper
         return items;
     }
 
-    // --- Метод для загрузки значений ENUM ---
     public static List<string> GetEnumValues(string enumTypeName)
     {
         var values = new List<string>();
@@ -407,7 +343,6 @@ public class DatabaseHelper
             return values;
         }
         
-        // SQL-запрос для получения значений ENUM из pg_enum
         string sql = @"
             SELECT e.enumlabel
             FROM pg_enum e
