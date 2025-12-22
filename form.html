@@ -3,100 +3,222 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Руководство пользователя</title>
+    <title>Руководство пользователя информационной системы</title>
     <style>
+        :root {
+            --primary-color: #0078d4;
+            --text-color: #333;
+            --bg-color: #f4f7f9;
+            --card-bg: #ffffff;
+            --accent-color: #2b3d4f;
+            --border-color: #e0e0e0;
+        }
+
         body {
-            font-family: 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
+            font-family: 'Segoe UI', system-ui, -apple-system, sans-serif;
             line-height: 1.6;
-            color: #333;
-            max-width: 800px;
-            margin: 40px auto;
-            padding: 0 20px;
-            background-color: #f9f9f9;
+            color: var(--text-color);
+            background-color: var(--bg-color);
+            margin: 0;
+            padding: 40px 20px;
         }
-        .card {
-            background: white;
-            padding: 40px;
-            border-radius: 12px;
-            box-shadow: 0 4px 20px rgba(0,0,0,0.08);
+
+        .container {
+            max-width: 900px;
+            margin: 0 auto;
+            background: var(--card-bg);
+            padding: 50px;
+            border-radius: 16px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.1);
         }
+
         h1 {
-            color: #0078d4;
-            border-bottom: 2px solid #0078d4;
+            color: var(--primary-color);
+            font-size: 2.2em;
+            text-align: center;
+            margin-bottom: 40px;
+            border-bottom: 3px solid var(--primary-color);
+            display: inline-block;
+            width: 100%;
+            padding-bottom: 15px;
+        }
+
+        h2 {
+            color: var(--accent-color);
+            border-left: 4px solid var(--primary-color);
+            padding-left: 15px;
+            margin-top: 35px;
+            background: #f0f7ff;
+            padding-top: 10px;
             padding-bottom: 10px;
         }
-        h2 {
-            color: #2b3d4f;
+
+        h3 {
+            color: var(--primary-color);
             margin-top: 25px;
         }
+
+        .feature-box {
+            background: #fff;
+            border: 1px solid var(--border-color);
+            border-radius: 8px;
+            padding: 20px;
+            margin-bottom: 20px;
+        }
+
         .step {
             display: flex;
-            align-items: center;
             margin-bottom: 15px;
+            align-items: flex-start;
         }
+
         .step-number {
-            background: #0078d4;
+            background: var(--primary-color);
             color: white;
-            width: 28px;
-            height: 28px;
+            width: 24px;
+            height: 24px;
             border-radius: 50%;
             display: flex;
             justify-content: center;
             align-items: center;
-            margin-right: 15px;
+            margin-right: 12px;
+            font-size: 0.9em;
             font-weight: bold;
             flex-shrink: 0;
+            margin-top: 4px;
         }
+
         .warning {
             background-color: #fff4ce;
             border-left: 5px solid #ffb900;
             padding: 15px;
             margin: 20px 0;
+            border-radius: 0 8px 8px 0;
         }
-        footer {
-            margin-top: 40px;
+
+        .kbd {
+            background: #eee;
+            border-radius: 3px;
+            border: 1px solid #b4b4b4;
+            box-shadow: 0 1px 1px rgba(0,0,0,0.2);
+            color: #333;
+            display: inline-block;
+            font-size: 0.85em;
+            font-weight: 700;
+            line-height: 1;
+            padding: 2px 4px;
+            white-space: nowrap;
+        }
+
+        .footer {
+            margin-top: 50px;
             text-align: center;
-            font-size: 0.9em;
-            color: #888;
+            font-size: 0.85em;
+            color: #777;
+            border-top: 1px solid var(--border-color);
+            padding-top: 20px;
+        }
+
+        ul {
+            padding-left: 20px;
+        }
+
+        li {
+            margin-bottom: 10px;
         }
     </style>
 </head>
 <body>
 
-<div class="card">
+<div class="container">
     <h1>Руководство пользователя</h1>
-    <p>Добро пожаловать в систему! Это краткая инструкция по работе с приложением.</p>
 
-    <h2>Быстрый старт</h2>
+    <section>
+        <h2>1. Начало работы и авторизация</h2>
+        <p>При запуске программы откроется окно авторизации.</p>
+        <div class="step">
+            <div class="step-number">1</div>
+            <div>Введите ваш <strong>логин</strong> и <strong>пароль</strong> в соответствующие поля.</div>
+        </div>
+        <div class="step">
+            <div class="step-number">2</div>
+            <div>Нажмите кнопку входа для доступа к главной панели.</div>
+        </div>
+    </section>
 
-    <div class="step">
-        <div class="step-number">1</div>
-        <div>Откройте главное окно приложения и выберите нужный раздел.</div>
+    <section>
+        <h2>2. Работа с таблицами</h2>
+        <div class="feature-box">
+            <p>В системе доступны два основных типа таблиц:</p>
+            <ul>
+                <li><strong>Справочники:</strong> общие таблицы базы данных, доступные всем пользователям.</li>
+                <li><strong>Мои таблицы:</strong> персональный набор таблиц, сформированный согласно вашим правам доступа.</li>
+            </ul>
+        </div>
+
+        <h3>Операции с данными (CRUD)</h3>
+        <p>Нажмите на название таблицы, чтобы открыть вкладку управления.</p>
+
+        <div class="step">
+            <div class="step-number">+</div>
+            <div><strong>Добавление:</strong> Нажмите <span class="kbd">Добавить</span>, введите данные в диалоговом окне и нажмите <span class="kbd">Сохранить</span>.</div>
+        </div>
+
+        <div class="step">
+            <div class="step-number">×</div>
+            <div><strong>Удаление:</strong> Выделите нужную запись кликом мыши, затем нажмите <span class="kbd">Удалить</span>.</div>
+        </div>
+
+        <div class="warning">
+            <strong>Примечание:</strong> Запись не может быть удалена, если она связана с данными в других таблицах.
+        </div>
+
+        <div class="step">
+            <div class="step-number">Q</div>
+            <div><strong>Поиск и сортировка:</strong> Используйте поисковую строку и кнопку <span class="kbd">Найти</span> либо нажмите на заголовок столбца для сортировки.</div>
+        </div>
+    </section>
+
+    <section>
+        <h2>3. Вкладка «Документы»</h2>
+        <p>Раздел предназначен для работы с SQL-запросами и формирования отчетов.</p>
+        <ul>
+            <li>Для стандартных отчетов используйте готовые кнопки вызова SQL-запросов.</li>
+            <li>Для произвольной выборки введите свой запрос в текстовое поле и нажмите <span class="kbd">Запустить</span>.</li>
+            <li>Результат можно выгрузить, нажав <span class="kbd">Сохранить в файл</span> (потребуется указать путь сохранения).</li>
+        </ul>
+    </section>
+
+    <section>
+        <h2>4. Аналитика</h2>
+        <p>В этом пункте визуализируются данные в виде графиков.</p>
+        <div class="step">
+            <div class="step-number">↻</div>
+            <div>Для актуализации данных в реальном времени включите <strong>автоматическое обновление</strong> кнопкой в левой части экрана.</div>
+        </div>
+    </section>
+
+    <section>
+        <h2>5. Настройки и безопасность</h2>
+        <h3>Раздел «Разное»</h3>
+        <ul>
+            <li><strong>Смена пароля:</strong> Введите старый пароль, затем новый и его подтверждение. Нажмите <span class="kbd">Сменить пароль</span>.</li>
+            <li><strong>Настройки приложения:</strong> Выберите подпункт «Настройки» для изменения интерфейса или параметров под свои предпочтения.</li>
+        </ul>
+
+        <div class="warning">
+            Для завершения сеанса работы используйте кнопку <strong>«Выход»</strong> в правом верхнем углу экрана.
+        </div>
+    </section>
+
+    <section>
+        <h2>6. Помощь</h2>
+        <p>Информацию о версии программного обеспечения и разработчиках можно найти в меню <span class="kbd">Справка</span> → <span class="kbd">О программе</span>.</p>
+    </section>
+
+    <div class="footer">
+        &copy; 2025 Информационная Система. Руководство пользователя.
     </div>
-
-    <div class="step">
-        <div class="step-number">2</div>
-        <div>Введите необходимые данные в соответствующие поля ввода.</div>
-    </div>
-
-    <div class="step">
-        <div class="step-number">3</div>
-        <div>Нажмите кнопку <strong>«Обработать»</strong> для получения результата.</div>
-    </div>
-
-    <div class="warning">
-        <strong>Важно:</strong> Не закрывайте приложение до завершения процесса загрузки данных.
-    </div>
-
-    <h2>Частые вопросы (FAQ)</h2>
-    <ul>
-        <li><strong>Программа не видит файл?</strong> Проверьте, что путь не содержит специальных символов.</li>
-        <li><strong>Как сохранить результат?</strong> Используйте меню «Файл» -> «Сохранить».</li>
-    </ul>
-
-    <footer>
-        &copy; 2025 Ваше Название Приложения. Все права защищены.
-    </footer>
 </div>
 
 </body>
